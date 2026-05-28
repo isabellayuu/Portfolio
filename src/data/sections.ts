@@ -69,11 +69,11 @@ export const sections: Section[] = [
     modalTitle: 'Skills',
     bulleted: true,
     body: [
-      'Programming — Python, Scala, React, TypeScript',
-      'Web — HTML, CSS',
-      'Tools — Git, VS Code, GitHub, Terminal, IntelliJ',
-      'Soft Skills — Teamwork, Problem-solving, Public speaking',
-      'Languages — Finnish, English, Chinese',
+      'Programming: Python, Scala, React, TypeScript',
+      'Web: HTML, CSS',
+      'Tools: Git, VS Code, GitHub, Terminal, IntelliJ',
+      'Soft Skills: Teamwork, Problem-solving, Public speaking',
+      'Languages: Finnish, English, Chinese',
     ],
   },
   {
