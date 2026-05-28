@@ -1,0 +1,127 @@
+.travel {
+  position: relative; /* anchor for the travel stickers */
+}
+
+/* the scattered board of country polaroids + tickets */
+.travel__board {
+  position: relative;
+  z-index: 1; /* above the decorative sticker layer */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px 24px;
+  padding: 8px 4px;
+}
+
+/* country polaroids are smaller than the main board ones */
+.travel__board .polaroid {
+  width: 150px;
+  padding: 10px 10px 0;
+}
+
+.travel__board .polaroid__caption {
+  font-size: 22px;
+  padding: 4px 4px 10px;
+}
+
+/* ---- tickets (boarding passes + Coldplay) ---- */
+.ticket {
+  align-self: center;
+  display: flex;
+  font-family: var(--type);
+  box-shadow: 0 6px 14px var(--shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.ticket__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 16px;
+}
+
+.ticket__stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  /* perforated divider line */
+  border-left: 2px dashed rgba(0, 0, 0, 0.25);
+}
+
+/* boarding pass — kraft / tan tones */
+.ticket--air {
+  width: 240px;
+  background: #ddcba6;
+  color: #5b4a2e;
+  transform: rotate(-3deg);
+}
+
+.ticket--air .ticket__stub {
+  background: #cdb98a;
+}
+
+.ticket__air-label {
+  font-size: 9px;
+  letter-spacing: 1px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.ticket__plane {
+  width: 22px;
+  height: 22px;
+}
+
+.ticket__route {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ticket__arrow {
+  font-size: 14px;
+}
+
+.ticket__meta {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+}
+
+/* Coldplay ticket — vintage pink */
+.ticket--coldplay {
+  width: 250px;
+  background: #e8a7c3;
+  color: #6e2440;
+  transform: rotate(2deg);
+}
+
+.ticket--coldplay .ticket__stub--coldplay {
+  background: #dd8fb3;
+  border-left-color: rgba(110, 36, 64, 0.4);
+}
+
+.ticket__brand {
+  font-family: var(--hand);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ticket__tour {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.ticket__admit {
+  font-size: 10px;
+  letter-spacing: 1px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}

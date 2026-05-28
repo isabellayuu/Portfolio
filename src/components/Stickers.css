@@ -1,0 +1,272 @@
+/* The sticker layer never intercepts clicks, so polaroids stay clickable. */
+.stickers {
+  pointer-events: none;
+}
+
+/* Page stickers anchor to #root (which is position: relative in index.css). */
+.stickers--page .sticker,
+.stickers--page .coffee {
+  position: absolute;
+  z-index: 0; /* rendered before the board, so polaroids paint on top */
+}
+
+/* Modal stickers anchor to the .modal__stage wrapper around the card. */
+.stickers--modal .sticker,
+.stickers--modal .coffee {
+  position: absolute;
+  z-index: 2;
+}
+
+/* Travel-page stickers anchor to the .travel container. */
+.stickers--travel .sticker,
+.stickers--travel .coffee {
+  position: absolute;
+  z-index: 0;
+}
+
+/* ---- flower / heart stickers (SVG) ---- */
+.sticker {
+  width: 34px; /* each position class can override this */
+  filter: drop-shadow(0 2px 3px rgba(60, 40, 20, 0.28));
+  opacity: 0.92;
+  user-select: none;
+}
+
+.sticker__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* scattered around the whole page */
+.sticker--p1 {
+  top: 90px;
+  left: 4%;
+  width: 42px;
+  transform: rotate(-12deg);
+}
+.sticker--p2 {
+  top: 220px;
+  right: 5%;
+  width: 34px;
+  transform: rotate(10deg);
+}
+.sticker--p3 {
+  top: 46%;
+  left: 2%;
+  width: 40px;
+  transform: rotate(8deg);
+}
+.sticker--p4 {
+  top: 58%;
+  right: 3%;
+  width: 38px;
+  transform: rotate(-9deg);
+}
+.sticker--p5 {
+  bottom: 8%;
+  left: 6%;
+  width: 38px;
+  transform: rotate(14deg);
+}
+.sticker--p6 {
+  bottom: 5%;
+  right: 8%;
+  width: 32px;
+  transform: rotate(-6deg);
+}
+.sticker--p7 {
+  top: 6%;
+  right: 17%;
+  width: 40px;
+  transform: rotate(12deg);
+}
+.sticker--p8 {
+  top: 38%;
+  right: 38%;
+  width: 26px;
+  opacity: 0.7;
+  transform: rotate(-10deg);
+}
+
+/* tucked along the sides of the modal */
+.sticker--m1 {
+  top: -26px;
+  left: -22px;
+  width: 42px;
+  transform: rotate(-16deg);
+}
+.sticker--m2 {
+  top: 30%;
+  right: -26px;
+  width: 32px;
+  transform: rotate(12deg);
+}
+.sticker--m3 {
+  bottom: -24px;
+  right: 24px;
+  width: 34px;
+  transform: rotate(-8deg);
+}
+.sticker--m4 {
+  bottom: 18%;
+  left: -26px;
+  width: 38px;
+  transform: rotate(10deg);
+}
+
+/* ---- coffee stains (drawn with CSS gradients to look like faint rings) ---- */
+.coffee {
+  border-radius: 50%;
+  /* a translucent ring: clear centre, darker brown edge */
+  background: radial-gradient(
+    circle,
+    rgba(110, 70, 30, 0) 50%,
+    rgba(110, 70, 30, 0.1) 57%,
+    rgba(110, 70, 30, 0.22) 64%,
+    rgba(110, 70, 30, 0.08) 71%,
+    transparent 75%
+  );
+  opacity: 0.8;
+}
+
+.coffee--p1 {
+  width: 150px;
+  height: 150px;
+  top: 16%;
+  right: 12%;
+  transform: rotate(6deg);
+}
+.coffee--p2 {
+  width: 110px;
+  height: 110px;
+  bottom: 14%;
+  left: 10%;
+  transform: rotate(-10deg);
+}
+.coffee--p3 {
+  width: 100px;
+  height: 100px;
+  top: 62%;
+  right: 5%;
+  transform: rotate(12deg);
+}
+.coffee--p4 {
+  width: 130px;
+  height: 130px;
+  bottom: 3%;
+  right: 30%;
+  transform: rotate(-6deg);
+}
+.coffee--p5 {
+  width: 90px;
+  height: 90px;
+  top: 34%;
+  left: 3%;
+  transform: rotate(8deg);
+}
+
+/* modal stains sit on the card paper (the stage matches the card width) */
+.coffee--m1 {
+  width: 110px;
+  height: 110px;
+  bottom: 6%;
+  right: 5%;
+}
+.coffee--m2 {
+  width: 90px;
+  height: 90px;
+  top: 6%;
+  left: 7%;
+  transform: rotate(8deg);
+}
+.coffee--m3 {
+  width: 80px;
+  height: 80px;
+  top: 48%;
+  right: -18px;
+  transform: rotate(-6deg);
+}
+
+/* scattered across the travel page */
+.sticker--t1 {
+  top: 8px;
+  left: 1%;
+  width: 40px;
+  transform: rotate(-12deg);
+}
+.sticker--t2 {
+  top: 40px;
+  right: 4%;
+  width: 44px;
+  transform: rotate(18deg);
+}
+.sticker--t3 {
+  top: 42%;
+  left: 0.5%;
+  width: 34px;
+  transform: rotate(10deg);
+}
+.sticker--t4 {
+  bottom: 16%;
+  right: 1%;
+  width: 46px;
+  transform: rotate(-24deg);
+}
+.sticker--t5 {
+  bottom: 4%;
+  left: 4%;
+  width: 38px;
+  transform: rotate(12deg);
+}
+.sticker--t6 {
+  top: 4%;
+  left: 44%;
+  width: 40px;
+  transform: rotate(8deg);
+}
+.sticker--t7 {
+  bottom: 6%;
+  right: 30%;
+  width: 30px;
+  transform: rotate(-8deg);
+}
+
+.coffee--t1 {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  right: 8%;
+  transform: rotate(6deg);
+}
+.coffee--t2 {
+  width: 120px;
+  height: 120px;
+  bottom: 22%;
+  left: 6%;
+  transform: rotate(-10deg);
+}
+.coffee--t3 {
+  width: 130px;
+  height: 130px;
+  top: 68%;
+  right: 12%;
+  transform: rotate(-8deg);
+}
+.coffee--t4 {
+  width: 100px;
+  height: 100px;
+  top: 6%;
+  left: 30%;
+  transform: rotate(10deg);
+}
+
+/* hide the busiest stickers on small screens so they don't crowd content */
+@media (max-width: 700px) {
+  .sticker--p8,
+  .sticker--p3,
+  .sticker--p4,
+  .coffee--p1 {
+    display: none;
+  }
+}

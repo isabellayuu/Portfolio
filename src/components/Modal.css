@@ -1,0 +1,269 @@
+.modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 30, 20, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 100;
+  animation: modal-fade 0.18s ease;
+}
+
+/* wraps the card so stickers can be placed just outside its edges */
+.modal__stage {
+  position: relative;
+  width: min(600px, 100%);
+  transform: rotate(-0.6deg);
+  animation: modal-pop 0.2s ease;
+}
+
+/* the travel gallery needs a much wider stage */
+.modal__stage--wide {
+  width: min(1040px, 100%);
+}
+
+.modal__card {
+  position: relative;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  color: var(--ink);
+  /* extra left padding (64px) keeps text clear of the red margin line at ~46px */
+  padding: 48px 40px 40px 64px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+  /* ruled-notebook paper: warm page colour, light-blue horizontal lines,
+     and a faint pink margin line — just like a real exercise book.
+     `background-attachment: local` makes the lines scroll with the text. */
+  background-color: #ece0bf;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      rgba(80, 110, 170, 0.2) 31px,
+      rgba(80, 110, 170, 0.2) 32px
+    ),
+    linear-gradient(
+      to right,
+      transparent 44px,
+      rgba(200, 90, 90, 0.26) 44px,
+      rgba(200, 90, 90, 0.26) 46px,
+      transparent 46px
+    ),
+    /* aged blotches + a soft vignette painted beneath the ruling */
+    radial-gradient(circle at 85% 14%, rgba(150, 110, 55, 0.18) 0, transparent 22%),
+    radial-gradient(circle at 12% 82%, rgba(150, 110, 55, 0.16) 0, transparent 24%),
+    radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(110, 80, 40, 0.14) 100%);
+  background-attachment: local;
+}
+
+/* the travel gallery uses plain (aged) vintage paper, no ruled lines */
+.modal__card--gallery {
+  padding: 40px 30px 36px;
+  background-color: #e7d9b6;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(255, 250, 235, 0.3) 0, transparent 38%),
+    radial-gradient(circle at 85% 18%, rgba(150, 110, 55, 0.16) 0, transparent 24%),
+    radial-gradient(circle at 80% 82%, rgba(120, 85, 45, 0.16) 0, transparent 30%),
+    radial-gradient(circle at 14% 80%, rgba(120, 85, 45, 0.13) 0, transparent 26%),
+    radial-gradient(ellipse at 50% 50%, transparent 56%, rgba(110, 80, 40, 0.16) 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 26px,
+      rgba(120, 95, 60, 0.04) 27px
+    );
+  background-attachment: scroll;
+}
+
+/* washi tape across the top of the modal too, for consistency */
+.modal__card::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 130px;
+  height: 30px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: var(--accent);
+  opacity: 0.55;
+}
+
+.modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: var(--type);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.modal__close:hover {
+  color: var(--accent);
+}
+
+/* external link in the top-right corner (e.g. GitHub on Projects) */
+.modal__link {
+  position: absolute;
+  top: 50px;
+  right: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--type);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  color: var(--accent);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(181, 101, 74, 0.4);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.modal__link:hover {
+  color: #8f4636;
+  border-color: var(--accent);
+}
+
+.modal__link-arrow {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.modal__title {
+  font-family: var(--hand);
+  font-size: 52px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.modal__text {
+  font-family: var(--type);
+  font-size: 16px;
+  /* 32px rhythm keeps the text sitting in step with the ruled lines */
+  line-height: 32px;
+  margin: 0 0 32px;
+}
+
+.modal__text:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- timeline entries (Education) ---- */
+.modal__entry {
+  margin-bottom: 28px;
+}
+
+.modal__entry:last-child {
+  margin-bottom: 0;
+}
+
+/* the school/organisation name: emphasised + red */
+.modal__entry-title {
+  font-family: var(--type);
+  font-weight: 700;
+  color: #b5302a;
+  font-size: 20px;
+  line-height: 32px;
+  margin: 0;
+}
+
+/* the years: a little smaller and muted */
+.modal__entry-years {
+  font-family: var(--type);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--ink-soft);
+  line-height: 32px;
+  margin: 0;
+}
+
+/* the description: same typewriter font as the plain body text (About Me) */
+.modal__entry-desc {
+  font-family: var(--type);
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ---- bulleted list (Skills, Hobbies) ---- */
+.modal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__list-item {
+  position: relative;
+  font-family: var(--type);
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--ink);
+  margin: 0;
+  padding-left: 22px;
+}
+
+/* the bullet in front of each line */
+.modal__list-item::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+/* ---- contact fields (label + value, with a gap between each) ---- */
+.modal__field {
+  margin-bottom: 22px;
+}
+
+.modal__field:last-child {
+  margin-bottom: 0;
+}
+
+.modal__field-label {
+  font-family: var(--type);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  line-height: 28px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.modal__field-value {
+  font-family: var(--type);
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--ink);
+  margin: 0;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: rotate(-0.6deg) translateY(12px);
+  }
+}

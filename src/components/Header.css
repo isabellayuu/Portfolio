@@ -1,0 +1,37 @@
+.header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.header__title {
+  font-family: var(--hand);
+  font-size: clamp(56px, 12vw, 104px);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: 0.95;
+  transform: rotate(-2deg);
+}
+
+.header__subtitle {
+  font-family: var(--type);
+  font-size: clamp(15px, 2.2vw, 20px);
+  color: var(--ink-soft);
+  margin: 8px auto 0;
+  max-width: 36ch;
+  letter-spacing: 0.5px;
+}
+
+/* a little hand-drawn underline beneath the subtitle */
+.header__subtitle::after {
+  content: '';
+  display: block;
+  width: 180px;
+  max-width: 60%;
+  height: 3px;
+  margin: 18px auto 0;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: rotate(-0.6deg);
+  opacity: 0.7;
+}

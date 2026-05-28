@@ -1,0 +1,12 @@
+/* The scrapbook "board" where the polaroids are scattered.
+   flex-wrap lets them flow onto new rows on smaller screens,
+   and the row/column gaps keep them from overlapping. */
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 72px 64px;
+  max-width: 940px;
+  margin: 64px auto 0;
+}
