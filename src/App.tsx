@@ -26,13 +26,16 @@ function App() {
       <main className="board">
         {/* Turn the data array into Polaroids. `key` must be unique —
             React uses it to track each item efficiently. */}
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <Polaroid
             key={section.id}
             caption={section.caption}
             image={section.image}
             photoColor={section.photoColor}
             rotation={section.rotation}
+            // stagger the intro: header plays first (~0.5s), then each
+            // polaroid drops in 0.11s after the previous one
+            revealDelay={0.5 + index * 0.11}
             onClick={() => setActiveSection(section)}
           />
         ))}

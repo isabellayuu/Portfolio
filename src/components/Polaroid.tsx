@@ -11,14 +11,24 @@ interface PolaroidProps {
   photoColor: string
   rotation: number
   onClick?: () => void
+  revealDelay?: number // seconds before this polaroid drops in (intro animation)
 }
 
-function Polaroid({ caption, image, photoColor, rotation, onClick }: PolaroidProps) {
+function Polaroid({
+  caption,
+  image,
+  photoColor,
+  rotation,
+  onClick,
+  revealDelay,
+}: PolaroidProps) {
   // Dynamic values are passed to CSS as custom properties (the --names),
   // so hover effects in Polaroid.css can layer on top of the rotation.
+  // --delay drives the staggered intro animation (see App.css).
   const style = {
     '--rot': `${rotation}deg`,
     '--photo': photoColor,
+    ...(revealDelay !== undefined ? { '--delay': `${revealDelay}s` } : {}),
   } as CSSProperties
 
   // The photo area is the same whether we're a button or a static div.

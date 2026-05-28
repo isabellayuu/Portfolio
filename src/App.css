@@ -10,3 +10,35 @@
   max-width: 940px;
   margin: 64px auto 0;
 }
+
+/* Intro animation: each polaroid "drops" in from above and settles into its
+   tilt with a little overshoot, like being stuck onto the scrapbook.
+   The per-polaroid --delay (set in App.tsx) staggers them one by one.
+   `backwards` keeps each one hidden during its delay, and reverts to the
+   normal CSS afterwards so the hover lift still works. */
+@keyframes polaroid-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px) rotate(calc(var(--rot) * 0.2));
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(8px) rotate(calc(var(--rot) * 1.12));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rot));
+  }
+}
+
+.board .polaroid {
+  animation: polaroid-drop 0.55s ease-out backwards;
+  animation-delay: var(--delay, 0s);
+}
+
+/* respect users who prefer less motion: show everything instantly */
+@media (prefers-reduced-motion: reduce) {
+  .board .polaroid {
+    animation: none;
+  }
+}

@@ -11,6 +11,8 @@
   margin: 0;
   line-height: 0.95;
   transform: rotate(-2deg);
+  /* slides down + fades in first, before the polaroids */
+  animation: header-in 0.6s ease-out backwards;
 }
 
 .header__subtitle {
@@ -20,6 +22,38 @@
   margin: 8px auto 0;
   max-width: 36ch;
   letter-spacing: 0.5px;
+  /* follows the title a moment later */
+  animation: subtitle-in 0.5s ease-out 0.22s backwards;
+}
+
+/* keep the title's resting -2deg tilt at the start and end of the slide */
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-26px) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+@keyframes subtitle-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__title,
+  .header__subtitle {
+    animation: none;
+  }
 }
 
 /* a little hand-drawn underline beneath the subtitle */
