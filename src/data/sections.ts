@@ -179,6 +179,7 @@ export const sections: Section[] = [
       { name: 'Croatia', image: picture('croatia.jpg'), photoColor: '#d8e6cf', rotation: -4 },
       { name: 'Estonia', image: picture('estonia.jpg'), photoColor: '#e6cfd8', rotation: 3 },
       { name: 'Hongkong', image: picture('hongkong.jpg'), photoColor: '#e6cdbe', rotation: -5 },
+      { name: 'Denmark', image: picture('denmark.jpg'), photoColor: '#e6dccf', rotation: 4 },
     ],
   },
   {
