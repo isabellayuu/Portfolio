@@ -11,6 +11,7 @@ export interface TimelineEntry {
 export interface ContactField {
   label: string // e.g. "Email"
   value: string // e.g. "name@example.com"
+  href?: string // when set, the value becomes a clickable link (mailto: or https)
 }
 
 // One polaroid inside a gallery section (e.g. the Travel page).

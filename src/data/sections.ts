@@ -186,9 +186,17 @@ export const sections: Section[] = [
     rotation: 4,
     modalTitle: 'Contact',
     fields: [
-      { label: 'Email', value: 'isabella.2.yu@gmail.com' },
+      {
+        label: 'Email',
+        value: 'isabella.2.yu@gmail.com',
+        href: 'mailto:isabella.2.yu@gmail.com',
+      },
       { label: 'Phone', value: '+358 40 147 3300' },
-      { label: 'LinkedIn', value: 'linkedin.com/in/isabella-yu' },
+      {
+        label: 'LinkedIn',
+        value: 'linkedin.com/in/isabella-yu-b7b234390',
+        href: 'https://www.linkedin.com/in/isabella-yu-b7b234390/',
+      },
     ],
   },
 ]

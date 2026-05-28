@@ -18,6 +18,10 @@
 .travel__board .polaroid {
   width: 150px;
   padding: 10px 10px 0;
+  /* drop into place one by one when the gallery opens (same keyframe as the
+     home page; --delay comes from TravelPage.tsx, --rot from each polaroid) */
+  animation: polaroid-drop 0.55s ease-out backwards;
+  animation-delay: var(--delay, 0s);
 }
 
 .travel__board .polaroid__caption {
@@ -33,6 +37,10 @@
   box-shadow: 0 6px 14px var(--shadow);
   position: relative;
   z-index: 1;
+  /* tilt via --rot (set per variant) so the drop keyframe can reuse it */
+  transform: rotate(var(--rot, 0deg));
+  animation: polaroid-drop 0.55s ease-out backwards;
+  animation-delay: var(--delay, 0s);
 }
 
 .ticket__body {
@@ -59,7 +67,7 @@
   width: 240px;
   background: #ddcba6;
   color: #5b4a2e;
-  transform: rotate(-3deg);
+  --rot: -3deg;
 }
 
 .ticket--air .ticket__stub {
@@ -99,7 +107,7 @@
   width: 250px;
   background: #e8a7c3;
   color: #6e2440;
-  transform: rotate(2deg);
+  --rot: 2deg;
 }
 
 .ticket--coldplay .ticket__stub--coldplay {
@@ -124,4 +132,12 @@
   letter-spacing: 1px;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
+}
+
+/* respect reduced-motion: show the board instantly, no drop-in */
+@media (prefers-reduced-motion: reduce) {
+  .travel__board .polaroid,
+  .ticket {
+    animation: none;
+  }
 }

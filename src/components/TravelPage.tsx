@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { GalleryItem } from '../types'
 import Polaroid from './Polaroid'
 import Stickers from './Stickers'
@@ -9,9 +9,23 @@ interface TravelPageProps {
 }
 
 // A vintage boarding pass — a small stub on the left, flight info on the right.
-function BoardingPass({ from, to, flight }: { from: string; to: string; flight: string }) {
+// `delay` staggers its drop-in animation (set as the --delay CSS variable).
+function BoardingPass({
+  from,
+  to,
+  flight,
+  delay,
+}: {
+  from: string
+  to: string
+  flight: string
+  delay: number
+}) {
   return (
-    <div className="ticket ticket--air">
+    <div
+      className="ticket ticket--air"
+      style={{ '--delay': `${delay}s` } as CSSProperties}
+    >
       <div className="ticket__stub">
         <span className="ticket__air-label">BOARDING PASS</span>
         <svg className="ticket__plane" viewBox="0 0 24 24" aria-hidden="true">
@@ -32,9 +46,12 @@ function BoardingPass({ from, to, flight }: { from: string; to: string; flight: 
 }
 
 // A vintage pink Coldplay concert ticket.
-function ColdplayTicket() {
+function ColdplayTicket({ delay }: { delay: number }) {
   return (
-    <div className="ticket ticket--coldplay">
+    <div
+      className="ticket ticket--coldplay"
+      style={{ '--delay': `${delay}s` } as CSSProperties}
+    >
       <div className="ticket__body">
         <span className="ticket__brand">COLDPLAY</span>
         <span className="ticket__tour">Music of the Spheres · World Tour</span>
@@ -48,32 +65,47 @@ function ColdplayTicket() {
 }
 
 function TravelPage({ items }: TravelPageProps) {
+  // Stagger the drop-in: each polaroid/ticket falls a little after the previous
+  // one, so the whole board assembles itself — like the home page on refresh.
+  const baseDelay = 0.15
+  const step = 0.08
+  let slot = 0
+  const nextDelay = () => baseDelay + slot++ * step
+
+  // Build the board in order: country polaroids with tickets tucked in at
+  // specific spots (the Coldplay ticket lands between Finland and Sweden).
+  const board: ReactNode[] = []
+  items.forEach((item) => {
+    board.push(
+      <Polaroid
+        key={item.name}
+        caption={item.name}
+        image={item.image}
+        photoColor={item.photoColor}
+        rotation={item.rotation}
+        revealDelay={nextDelay()}
+      />,
+    )
+    if (item.name === 'England') {
+      board.push(
+        <BoardingPass key="bp-1" from="HEL" to="LHR" flight="AY1331" delay={nextDelay()} />,
+      )
+    }
+    if (item.name === 'Finland') {
+      board.push(<ColdplayTicket key="coldplay" delay={nextDelay()} />)
+    }
+    if (item.name === 'Poland') {
+      board.push(
+        <BoardingPass key="bp-2" from="WAW" to="HEL" flight="AY1146" delay={nextDelay()} />,
+      )
+    }
+  })
+
   return (
     <div className="travel">
       {/* decorations sit behind the polaroids (rendered first in the DOM) */}
       <Stickers variant="travel" />
-
-      <div className="travel__board">
-        {items.map((item) => (
-          <Fragment key={item.name}>
-            <Polaroid
-              caption={item.name}
-              image={item.image}
-              photoColor={item.photoColor}
-              rotation={item.rotation}
-            />
-            {/* tuck a couple of boarding passes and the Coldplay ticket into
-                the flow at specific spots */}
-            {item.name === 'England' && (
-              <BoardingPass from="HEL" to="LHR" flight="AY1331" />
-            )}
-            {item.name === 'Finland' && <ColdplayTicket />}
-            {item.name === 'Poland' && (
-              <BoardingPass from="WAW" to="HEL" flight="AY1146" />
-            )}
-          </Fragment>
-        ))}
-      </div>
+      <div className="travel__board">{board}</div>
     </div>
   )
 }

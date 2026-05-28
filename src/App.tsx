@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Polaroid from './components/Polaroid'
 import Modal from './components/Modal'
 import Stickers from './components/Stickers'
+import SocialLinks from './components/SocialLinks'
 import { sections } from './data/sections'
 import type { Section } from './types'
 import './App.css'
@@ -17,6 +18,9 @@ function App() {
     <>
       {/* Decorative layer first, so the polaroids paint on top of it. */}
       <Stickers variant="page" />
+
+      {/* Social links pinned to the top-right corner. */}
+      <SocialLinks />
 
       <Header
         title="Isabella Yu"

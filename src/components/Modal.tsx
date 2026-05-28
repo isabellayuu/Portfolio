@@ -87,7 +87,20 @@ function Modal({ section, onClose }: ModalProps) {
             section.fields.map((field, index) => (
               <div key={index} className="modal__field">
                 <p className="modal__field-label">{field.label}</p>
-                <p className="modal__field-value">{field.value}</p>
+                {field.href ? (
+                  <a
+                    className="modal__field-value modal__field-link"
+                    href={field.href}
+                    // open real web pages in a new tab; mailto: opens the mail app
+                    {...(field.href.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
+                  >
+                    {field.value}
+                  </a>
+                ) : (
+                  <p className="modal__field-value">{field.value}</p>
+                )}
               </div>
             ))
           ) : section.bulleted ? (

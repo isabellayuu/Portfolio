@@ -24,6 +24,27 @@
   z-index: 0;
 }
 
+/* fade the whole travel decoration layer in while the board drops into place.
+   (Only opacity — animating transform here would shift the absolute children.) */
+.stickers--travel {
+  animation: decor-fade 0.7s ease-out 0.3s backwards;
+}
+
+@keyframes decor-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stickers--travel {
+    animation: none;
+  }
+}
+
 /* ---- flower / heart stickers (SVG) ---- */
 .sticker {
   width: 34px; /* each position class can override this */

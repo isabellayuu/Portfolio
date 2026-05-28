@@ -255,6 +255,22 @@
   margin: 0;
 }
 
+/* clickable contact values (Email, LinkedIn) */
+.modal__field-link {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(181, 101, 74, 0.4);
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.modal__field-link:hover {
+  color: #8f4636;
+  border-color: var(--accent);
+}
+
 @keyframes modal-fade {
   from {
     opacity: 0;

@@ -1,0 +1,102 @@
+/* a small vertical column of stamps in the top-right corner.
+   Vertical keeps it narrow so it never crowds the centred title on mobile. */
+.social {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* gentle fade-in alongside the header intro */
+  animation: social-in 0.6s ease-out 0.2s backwards;
+}
+
+.social__stamp {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 44px; /* slightly tall → postage-stamp proportions */
+  color: #6f5b43; /* warm brown icon, not a bright brand colour */
+  background-color: var(--frame); /* cream paper */
+  /* dashed warm border stands in for a stamp's perforated edge */
+  border: 1.5px dashed rgba(150, 120, 80, 0.55);
+  box-shadow: 0 3px 7px var(--shadow);
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+/* slight individual tilts so they look hand-placed */
+.social__stamp--linkedin {
+  transform: rotate(-5deg);
+}
+.social__stamp--email {
+  transform: rotate(3deg);
+}
+.social__stamp--github {
+  transform: rotate(-3deg);
+}
+
+/* a tiny piece of tape across the top of each stamp */
+.social__stamp::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 26px;
+  height: 11px;
+  transform: translateX(-50%) rotate(-4deg);
+  background-color: rgba(198, 180, 142, 0.6);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.social__stamp svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* hover/focus: lift + straighten, like peeling the sticker up slightly */
+.social__stamp:hover,
+.social__stamp:focus-visible {
+  transform: rotate(0deg) translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 14px var(--shadow);
+  color: var(--accent);
+  outline: none;
+}
+
+@keyframes social-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* smaller + tighter on phones so the corner stays uncluttered */
+@media (max-width: 600px) {
+  .social {
+    top: 14px;
+    right: 14px;
+    gap: 10px;
+  }
+  .social__stamp {
+    width: 34px;
+    height: 38px;
+  }
+  .social__stamp svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social {
+    animation: none;
+  }
+}
