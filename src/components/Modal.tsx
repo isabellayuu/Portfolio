@@ -118,6 +118,19 @@ function Modal({ section, onClose }: ModalProps) {
               </p>
             ))
           )}
+
+          {/* optional video, taped into a vintage frame below the content */}
+          {section.video && (
+            <div className="modal__video-frame">
+              <video
+                className="modal__video"
+                src={section.video}
+                controls
+                preload="metadata"
+                playsInline
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

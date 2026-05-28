@@ -255,6 +255,38 @@
   margin: 0;
 }
 
+/* ---- video, framed like a taped-in polaroid ---- */
+.modal__video-frame {
+  position: relative;
+  width: min(440px, 100%);
+  margin: 28px auto 6px;
+  padding: 12px 12px 14px;
+  background-color: var(--frame); /* cream polaroid-style frame */
+  box-shadow: 0 8px 18px var(--shadow);
+  transform: rotate(-1.2deg);
+}
+
+/* a piece of washi tape across the top of the video frame */
+.modal__video-frame::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -12px;
+  left: 50%;
+  width: 96px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  background-color: rgba(198, 180, 142, 0.62);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.modal__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
 /* clickable contact values (Email, LinkedIn) */
 .modal__field-link {
   display: inline-block;

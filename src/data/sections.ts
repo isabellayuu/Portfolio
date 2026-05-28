@@ -144,10 +144,13 @@ export const sections: Section[] = [
     bulleted: true,
     body: [
       'Former synchronized skater, competed at the Finnish national (SM) level',
+      'I played the violin for several years',
       'Going to the gym',
       'Traveling',
       'Doing personal programming projects',
     ],
+    // file lives in public/, so it's served from the site root
+    video: '/skating.mp4',
   },
   {
     id: 'travel',

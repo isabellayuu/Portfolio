@@ -45,4 +45,5 @@ export interface Section {
   fields?: ContactField[] // label + value pairs (Contact)
   gallery?: GalleryItem[] // when set, the modal shows a board of polaroids
   link?: SectionLink // optional external link in the modal's top-right corner
+  video?: string // optional video URL shown below the content (e.g. Hobbies)
 }
