@@ -1,15 +1,14 @@
 :root {
-  /* Vintage scrapbook palette — tweak these to recolour the whole site */
-  --paper: #ecdfc2; /* aged, slightly yellowed paper */
-  --ink: #3b322a; /* warm dark-brown body text */
-  --ink-soft: #6f6253; /* muted brown for secondary text */
-  --accent: #b5654a; /* faded terracotta */
-  --frame: #faf6ec; /* milk-white polaroid frame (warm white, not brownish) */
+  /* Vintage scrapbook palette */
+  --paper: #ecdfc2;
+  --ink: #3b322a;
+  --ink-soft: #6f6253;
+  --accent: #b5654a;
+  --frame: #faf6ec;
   --shadow: rgba(60, 45, 30, 0.28);
 
-  /* Two fonts, named so components don't repeat the family strings */
-  --hand: 'Caveat', 'Segoe Script', cursive; /* handwriting — headings */
-  --type: 'Special Elite', 'Courier New', monospace; /* typewriter — body */
+  --hand: 'Caveat', 'Segoe Script', cursive;
+  --type: 'Special Elite', 'Courier New', monospace;
 
   font-family: var(--type);
   font-size: 18px;
@@ -28,9 +27,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--paper);
-  /* Layered gradients build up an aged-paper look:
-     a darkened vignette at the edges, scattered brown "age spots",
-     a soft highlight so it doesn't go flat, and a faint paper grain. */
+
   background-image:
     radial-gradient(
       ellipse at 50% 50%,
@@ -43,7 +40,7 @@ body {
     radial-gradient(circle at 22% 88%, rgba(120, 85, 45, 0.1) 0, transparent 24%),
     radial-gradient(circle at 60% 55%, rgba(120, 85, 45, 0.06) 0, transparent 30%),
     radial-gradient(circle at 32% 30%, rgba(255, 252, 240, 0.35) 0, transparent 42%),
-    /* fine paper fibres: faint criss-cross grain in two directions */
+
     repeating-linear-gradient(
       90deg,
       transparent 0,
@@ -58,7 +55,7 @@ body {
       rgba(120, 95, 60, 0.025) 3px,
       rgba(120, 95, 60, 0.025) 4px
     ),
-    /* soft horizontal banding like aged paper */
+
     repeating-linear-gradient(
       0deg,
       transparent 0,
@@ -69,7 +66,7 @@ body {
 }
 
 #root {
-  position: relative; /* anchor for the absolutely-positioned page stickers */
+  position: relative;
   max-width: 1100px;
   margin: 0 auto;
   padding: 40px 24px 100px;

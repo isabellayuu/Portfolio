@@ -1,8 +1,6 @@
 import './SocialLinks.css'
 
 // Three small vintage "postage-stamp" links in the top-right corner.
-// LinkedIn & GitHub open in a new tab; Email opens the user's mail client.
-// Each link has an aria-label so screen readers announce it clearly.
 function SocialLinks() {
   return (
     <nav className="social" aria-label="Social links">

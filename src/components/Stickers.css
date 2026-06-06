@@ -1,13 +1,11 @@
-/* The sticker layer never intercepts clicks, so polaroids stay clickable. */
 .stickers {
   pointer-events: none;
 }
 
-/* Page stickers anchor to #root (which is position: relative in index.css). */
 .stickers--page .sticker,
 .stickers--page .coffee {
   position: absolute;
-  z-index: 0; /* rendered before the board, so polaroids paint on top */
+  z-index: 0;
 }
 
 /* Modal stickers anchor to the .modal__stage wrapper around the card. */
@@ -24,8 +22,7 @@
   z-index: 0;
 }
 
-/* fade the whole travel decoration layer in while the board drops into place.
-   (Only opacity — animating transform here would shift the absolute children.) */
+/* fade the whole travel decoration layer in while the board drops into place. */
 .stickers--travel {
   animation: decor-fade 0.7s ease-out 0.3s backwards;
 }
@@ -45,7 +42,7 @@
   }
 }
 
-/* ---- flower / heart stickers (SVG) ---- */
+/* flower / heart stickers */
 .sticker {
   width: 34px; /* each position class can override this */
   filter: drop-shadow(0 2px 3px rgba(60, 40, 20, 0.28));
@@ -136,10 +133,9 @@
   transform: rotate(10deg);
 }
 
-/* ---- coffee stains (drawn with CSS gradients to look like faint rings) ---- */
+/* coffee stains */
 .coffee {
   border-radius: 50%;
-  /* a translucent ring: clear centre, darker brown edge */
   background: radial-gradient(
     circle,
     rgba(110, 70, 30, 0) 50%,
@@ -187,7 +183,7 @@
   transform: rotate(8deg);
 }
 
-/* modal stains sit on the card paper (the stage matches the card width) */
+/* modal stains sit on the card paper */
 .coffee--m1 {
   width: 110px;
   height: 110px;
@@ -282,7 +278,6 @@
   transform: rotate(10deg);
 }
 
-/* hide the busiest stickers on small screens so they don't crowd content */
 @media (max-width: 700px) {
   .sticker--p8,
   .sticker--p3,

@@ -8,8 +8,7 @@ interface TravelPageProps {
   items: GalleryItem[]
 }
 
-// A vintage boarding pass — a small stub on the left, flight info on the right.
-// `delay` staggers its drop-in animation (set as the --delay CSS variable).
+// A vintage boarding pass
 function BoardingPass({
   from,
   to,
@@ -65,15 +64,12 @@ function ColdplayTicket({ delay }: { delay: number }) {
 }
 
 function TravelPage({ items }: TravelPageProps) {
-  // Stagger the drop-in: each polaroid/ticket falls a little after the previous
-  // one, so the whole board assembles itself — like the home page on refresh.
+  // each polaroid/ticket falls a little after the previous
   const baseDelay = 0.15
   const step = 0.08
   let slot = 0
   const nextDelay = () => baseDelay + slot++ * step
 
-  // Build the board in order: country polaroids with tickets tucked in at
-  // specific spots (the Coldplay ticket lands between Finland and Sweden).
   const board: ReactNode[] = []
   items.forEach((item) => {
     board.push(
@@ -103,7 +99,6 @@ function TravelPage({ items }: TravelPageProps) {
 
   return (
     <div className="travel">
-      {/* decorations sit behind the polaroids (rendered first in the DOM) */}
       <Stickers variant="travel" />
       <div className="travel__board">{board}</div>
     </div>

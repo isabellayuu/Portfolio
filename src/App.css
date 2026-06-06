@@ -1,6 +1,4 @@
-/* The scrapbook "board" where the polaroids are scattered.
-   flex-wrap lets them flow onto new rows on smaller screens,
-   and the row/column gaps keep them from overlapping. */
+/* The scrapbook "board" where the polaroids are scattered. */
 .board {
   display: flex;
   flex-wrap: wrap;
@@ -11,11 +9,7 @@
   margin: 64px auto 0;
 }
 
-/* Intro animation: each polaroid "drops" in from above and settles into its
-   tilt with a little overshoot, like being stuck onto the scrapbook.
-   The per-polaroid --delay (set in App.tsx) staggers them one by one.
-   `backwards` keeps each one hidden during its delay, and reverts to the
-   normal CSS afterwards so the hover lift still works. */
+/* Intro animation */
 @keyframes polaroid-drop {
   0% {
     opacity: 0;
@@ -36,7 +30,6 @@
   animation-delay: var(--delay, 0s);
 }
 
-/* respect users who prefer less motion: show everything instantly */
 @media (prefers-reduced-motion: reduce) {
   .board .polaroid {
     animation: none;

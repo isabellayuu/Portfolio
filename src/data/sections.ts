@@ -1,10 +1,7 @@
 import type { Section } from '../types'
 import { picture } from '../images'
 
-// All your portfolio content lives here. Edit the text freely —
-// the components read from this array, so the page updates automatically.
-// `picture('me.jpg')` looks up an image in src/pictures/. Polaroids without
-// an image fall back to a vintage textured fill (no emoji anywhere).
+// All portfolio content lives here.
 export const sections: Section[] = [
   {
     id: 'about',
@@ -18,7 +15,6 @@ export const sections: Section[] = [
       "I've always been the kind of person who wants to know how things work, taking things apart, asking too many questions, and getting lost in a good problem. That's what drew me to computer science. It's a field where curiosity actually pays off, and where you get to build things that didn't exist yesterday.",
       'Fun facts about me:',
       '- I grew up bilingual, with Finnish and Mandarin as my two mother tongues. Living between two languages and cultures has always felt natural to me. English came along later and now sits comfortably beside them as my third language.',
-      '- My comfort food is Hotpot and snails.',
       '- My record for planking is 8 minutes.',
     ],
   },
@@ -69,10 +65,10 @@ export const sections: Section[] = [
     modalTitle: 'Skills',
     bulleted: true,
     body: [
-      'Programming: Python, Scala, React, TypeScript',
+      'Programming: Python, Scala / Java, React, TypeScript',
       'Web: HTML, CSS',
-      'Tools: Git, VS Code, GitHub, Terminal, IntelliJ',
-      'Soft Skills: Teamwork, Problem-solving, Public speaking',
+      'Tools: Git, VS Code, IntelliJ',
+      'Soft Skills: Teamwork, Problem-solving',
       'Languages: Finnish, English, Chinese',
     ],
   },
@@ -119,8 +115,7 @@ export const sections: Section[] = [
     rotation: 2,
     modalTitle: 'Achievements',
     body: [
-      'EF Language Award',
-      'Represented my team at the Finnish National Synchronized Skating Championships.'
+      '- Represented my team at the Finnish National Synchronized Skating Championships.'
     ],
   },
   {
@@ -159,10 +154,8 @@ export const sections: Section[] = [
     photoColor: '#d8e6cf',
     rotation: -2,
     modalTitle: 'Travel',
-    // `gallery` makes the modal open a board of country polaroids instead of
-    // text. Countries with a matching photo in src/pictures/ use it; the rest
-    // (Italy, Germany, Greece) get a vintage fill. Order matters: the pink
-    // Coldplay ticket is inserted between Finland and Sweden.
+    // gallery makes the modal open a board of country polaroids
+
     gallery: [
       { name: 'China', image: picture('china.jpg'), photoColor: '#e6cdbe', rotation: -5 },
       { name: 'France', image: picture('france.jpg'), photoColor: '#d8d3e6', rotation: 4 },

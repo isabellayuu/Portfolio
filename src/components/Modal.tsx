@@ -1,21 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import type { Section } from '../types'
 import Stickers from './Stickers'
 import TravelPage from './TravelPage'
 import './Modal.css'
 
-// `section` is either a Section (modal open, showing that content)
-// or null (modal closed). This "value or null" pattern is a common,
-// type-safe way to model open/closed in React + TypeScript.
 interface ModalProps {
   section: Section | null
   onClose: () => void
 }
 
 function Modal({ section, onClose }: ModalProps) {
-  // Listen for the Escape key while the modal is open.
-  // The returned function "cleans up" the listener so we don't
-  // stack a new one every time the modal re-renders.
   useEffect(() => {
     if (!section) return
     const handleKey = (e: KeyboardEvent) => {
@@ -25,18 +19,12 @@ function Modal({ section, onClose }: ModalProps) {
     return () => window.removeEventListener('keydown', handleKey)
   }, [section, onClose])
 
-  // Nothing to show when closed — render nothing.
   if (!section) return null
 
   return (
-    // Clicking the dark backdrop closes the modal...
     <div className="modal__backdrop" onClick={onClose}>
-      {/* The stage wraps the card so stickers can sit just outside its edges.
-          Gallery sections (Travel) use a wider stage and card. */}
       <div className={`modal__stage${section.gallery ? ' modal__stage--wide' : ''}`}>
         <Stickers variant="modal" />
-        {/* ...but stopPropagation keeps clicks *inside* the card from
-            bubbling up to the backdrop and closing it accidentally. */}
         <div
           className={`modal__card${section.gallery ? ' modal__card--gallery' : ''}`}
           onClick={(e) => e.stopPropagation()}
@@ -48,7 +36,6 @@ function Modal({ section, onClose }: ModalProps) {
             ×
           </button>
 
-          {/* optional external link in the top-right corner (e.g. GitHub) */}
           {section.link && (
             <a
               className="modal__link"
@@ -68,58 +55,53 @@ function Modal({ section, onClose }: ModalProps) {
             {section.modalTitle}
           </h2>
 
-          {/* Each section picks one content style. We check them in turn:
-              gallery → timeline → contact fields → bulleted list → paragraphs. */}
           {section.gallery ? (
             <TravelPage items={section.gallery} />
-          ) : section.timeline ? (
-            section.timeline.map((entry, index) => (
-              <div key={index} className="modal__entry">
-                <p className="modal__entry-title">{entry.title}</p>
-                {/* only show the years line if this entry has one */}
-                {entry.years && (
-                  <p className="modal__entry-years">{entry.years}</p>
-                )}
-                <p className="modal__entry-desc">{entry.description}</p>
-              </div>
-            ))
-          ) : section.fields ? (
-            section.fields.map((field, index) => (
-              <div key={index} className="modal__field">
-                <p className="modal__field-label">{field.label}</p>
-                {field.href ? (
-                  <a
-                    className="modal__field-value modal__field-link"
-                    href={field.href}
-                    // open real web pages in a new tab; mailto: opens the mail app
-                    {...(field.href.startsWith('http')
-                      ? { target: '_blank', rel: 'noopener noreferrer' }
-                      : {})}
-                  >
-                    {field.value}
-                  </a>
-                ) : (
-                  <p className="modal__field-value">{field.value}</p>
-                )}
-              </div>
-            ))
-          ) : section.bulleted ? (
-            <ul className="modal__list">
-              {section.body?.map((item, index) => (
-                <li key={index} className="modal__list-item">
-                  {item}
-                </li>
-              ))}
-            </ul>
           ) : (
-            section.body?.map((paragraph, index) => (
-              <p key={index} className="modal__text">
-                {paragraph}
-              </p>
-            ))
+            <div className="modal__body">
+              {section.timeline ? (
+                section.timeline.map((entry, index) => (
+                  <div key={index} className="modal__entry">
+                    <p className="modal__entry-title">{entry.title}</p>
+                    {entry.years && (
+                      <p className="modal__entry-years">{entry.years}</p>
+                    )}
+                    <p className="modal__entry-desc">{entry.description}</p>
+                  </div>
+                ))
+              ) : section.fields ? (
+                section.fields.map((field, index) => (
+                  <div key={index} className="modal__field">
+                    <p className="modal__field-label">{field.label}</p>
+                    {field.href ? (
+                      <a
+                        className="modal__field-value modal__field-link"
+                        href={field.href}
+                        {...(field.href.startsWith('http')
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
+                      >
+                        {field.value}
+                      </a>
+                    ) : (
+                      <p className="modal__field-value">{field.value}</p>
+                    )}
+                  </div>
+                ))
+              ) : section.bulleted ? (
+                <ul className="modal__list">
+                  {section.body?.map((item, index) => (
+                    <li key={index} className="modal__list-item">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                section.body && renderBody(section.body)
+              )}
+            </div>
           )}
 
-          {/* optional video, taped into a vintage frame below the content */}
           {section.video && (
             <div className="modal__video-frame">
               <video
@@ -135,6 +117,45 @@ function Modal({ section, onClose }: ModalProps) {
       </div>
     </div>
   )
+}
+
+function renderBody(body: string[]): ReactNode[] {
+  const elements: ReactNode[] = []
+  let bullets: string[] = []
+
+  const flushBullets = () => {
+    if (bullets.length === 0) return
+    const items = bullets
+    elements.push(
+      <ul key={`list-${elements.length}`} className="modal__list">
+        {items.map((item, i) => (
+          <li key={i} className="modal__list-item">
+            {item}
+          </li>
+        ))}
+      </ul>,
+    )
+    bullets = []
+  }
+
+  body.forEach((line, index) => {
+    if (line.startsWith('- ')) {
+      bullets.push(line.slice(2)) // drop the "- " marker
+    } else {
+      flushBullets()
+      
+      const leadsIntoList = body[index + 1]?.startsWith('- ')
+      const className = leadsIntoList ? 'modal__text modal__text--tight' : 'modal__text'
+      elements.push(
+        <p key={index} className={className}>
+          {line}
+        </p>,
+      )
+    }
+  })
+  flushBullets()
+
+  return elements
 }
 
 export default Modal

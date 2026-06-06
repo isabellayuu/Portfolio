@@ -1,5 +1,4 @@
-/* a small vertical column of stamps in the top-right corner.
-   Vertical keeps it narrow so it never crowds the centred title on mobile. */
+/* a small vertical column of stamps in the top-right corner */
 .social {
   position: absolute;
   top: 22px;
@@ -8,7 +7,6 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  /* gentle fade-in alongside the header intro */
   animation: social-in 0.6s ease-out 0.2s backwards;
 }
 
@@ -17,10 +15,9 @@
   display: grid;
   place-items: center;
   width: 40px;
-  height: 44px; /* slightly tall → postage-stamp proportions */
-  color: #6f5b43; /* warm brown icon, not a bright brand colour */
-  background-color: var(--frame); /* cream paper */
-  /* dashed warm border stands in for a stamp's perforated edge */
+  height: 44px;
+  color: #6f5b43;
+  background-color: var(--frame);
   border: 1.5px dashed rgba(150, 120, 80, 0.55);
   box-shadow: 0 3px 7px var(--shadow);
   text-decoration: none;
@@ -59,7 +56,6 @@
   height: 20px;
 }
 
-/* hover/focus: lift + straighten, like peeling the sticker up slightly */
 .social__stamp:hover,
 .social__stamp:focus-visible {
   transform: rotate(0deg) translateY(-3px) scale(1.06);
@@ -78,7 +74,6 @@
   }
 }
 
-/* smaller + tighter on phones so the corner stays uncluttered */
 @media (max-width: 600px) {
   .social {
     top: 14px;

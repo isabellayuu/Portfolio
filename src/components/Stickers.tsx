@@ -1,10 +1,5 @@
 import './Stickers.css'
 
-// Pure decoration: small vintage-style flower and heart "stickers" (drawn as
-// SVG, not emoji) plus a couple of coffee stains, scattered around.
-// `variant` lets one component serve two places with different layouts:
-//   - "page"  → spread across the whole portfolio background
-//   - "modal" → tucked along the sides of the popup
 type Variant = 'page' | 'modal' | 'travel'
 type Shape = 'heart' | 'flower' | 'airplane'
 
@@ -12,13 +7,11 @@ interface StickersProps {
   variant: Variant
 }
 
-// Each sticker = a shape, a CSS class that positions/rotates it, and muted
-// vintage colours. Keeping them in arrays lets us render with .map().
 interface StickerItem {
   shape: Shape
   className: string
-  color: string // heart body / flower petals
-  center?: string // flower centre (ignored by hearts)
+  color: string
+  center?: string
 }
 
 const stickerSets: Record<Variant, StickerItem[]> = {
@@ -49,7 +42,7 @@ const stickerSets: Record<Variant, StickerItem[]> = {
   ],
 }
 
-// Coffee stains are drawn purely in CSS (see Stickers.css).
+// Coffee stains are drawn purely in CSS.
 const coffeeStains: Record<Variant, string[]> = {
   page: [
     'coffee coffee--p1',
@@ -67,7 +60,7 @@ const coffeeStains: Record<Variant, string[]> = {
   ],
 }
 
-// The actual drawing. A cream stroke gives each shape a die-cut "sticker" edge.
+// The actual drawing.
 function StickerShape({ shape, color, center }: Omit<StickerItem, 'className'>) {
   if (shape === 'heart') {
     return (
@@ -94,7 +87,7 @@ function StickerShape({ shape, color, center }: Omit<StickerItem, 'className'>) 
       </svg>
     )
   }
-  // a simple daisy: five petals around a centre
+  // a simple daisy
   return (
     <svg className="sticker__svg" viewBox="0 0 40 40" aria-hidden="true">
       <g fill={color} stroke="#fbf3df" strokeWidth="1">
@@ -111,7 +104,6 @@ function StickerShape({ shape, color, center }: Omit<StickerItem, 'className'>) 
 
 function Stickers({ variant }: StickersProps) {
   return (
-    // aria-hidden hides this purely visual layer from screen readers.
     <div className={`stickers stickers--${variant}`} aria-hidden="true">
       {coffeeStains[variant].map((className, index) => (
         <span key={`coffee-${index}`} className={className} />
